@@ -1,0 +1,4 @@
+﻿{
+  "name": "SceneService",
+  "references":[ "GUID:05de8c7f21cc42a9b1a4bdbed84cf3ec", "GUID:f51ebe6a0ceec4240a699833d6309b23" ]
+}

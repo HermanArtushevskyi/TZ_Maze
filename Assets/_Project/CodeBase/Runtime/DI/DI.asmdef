@@ -1,0 +1,4 @@
+﻿{
+  "name": "DI",
+  "references":[ "GUID:0d8beb7f090555447a6cf5ce9e54dbb4", "GUID:05de8c7f21cc42a9b1a4bdbed84cf3ec", "GUID:fb395d86da60409482ffd4138aee8f12", "GUID:61f3e1902f2f4f04b0a8fa6f2b3cf99e", "GUID:ae884a83e6ce4331b02a8943eddf6aef", "GUID:92b43604cc2c42c3b8c552dd9b11c6f2" ]
+}
