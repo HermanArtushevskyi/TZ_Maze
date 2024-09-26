@@ -1,3 +1,18 @@
-﻿{
-  "name": "InputService"
+{
+    "name": "InputService",
+    "rootNamespace": "",
+    "references": [
+        "GUID:87f8987af98344f99c62947b04146a20",
+        "GUID:c757686799062964686c9668a1de83ba",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,3 +1,4 @@
 ﻿{
-  "name": "InputService.Interfaces"
+  "name": "InputService.Interfaces",
+  "references":[ "GUID:c757686799062964686c9668a1de83ba" ]
 }
