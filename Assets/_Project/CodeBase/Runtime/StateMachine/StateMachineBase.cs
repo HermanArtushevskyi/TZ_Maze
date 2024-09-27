@@ -13,40 +13,42 @@ namespace _Project.CodeBase.Runtime.StateMachine
 
         public abstract UniTask Initialize();
 
-        public virtual UniTask<TransitionResult> Enter<TState>() where TState : IState
+        public virtual async UniTask<TransitionResult> Enter<TState>() where TState : IState
         {
             if (typeof(TState) == CurrentState?.GetType())
-                return UniTask.FromResult(TransitionResult.Invalid());
+                return await UniTask.FromResult(TransitionResult.Invalid());
             
             IState requestedState;
             if (States.ContainsKey(typeof(TState)))
             {
                 requestedState = (IState) States[typeof(TState)];
             }
-            else return UniTask.FromResult(TransitionResult.Invalid());
+            else return await UniTask.FromResult(TransitionResult.Invalid());
 
-            CurrentState?.Exit();
-            requestedState.Enter();
+            if (CurrentState != null)
+                await CurrentState.Exit();
             CurrentState = requestedState;
-            return UniTask.FromResult(TransitionResult.Valid());
+            await requestedState.Enter();
+            return await UniTask.FromResult(TransitionResult.Valid());
         }
 
-        public virtual UniTask<TransitionResult> Enter<TState, TPayload>(TPayload payload) where TState : IStateWithPayload<TPayload>
+        public virtual async UniTask<TransitionResult> Enter<TState, TPayload>(TPayload payload) where TState : IStateWithPayload<TPayload>
         {
             if (typeof(TState) == CurrentState?.GetType())
-                return UniTask.FromResult(TransitionResult.Invalid());
+                return await UniTask.FromResult(TransitionResult.Invalid());
             
             IStateWithPayload<TPayload> requestedState;
             if (States.ContainsKey(typeof(TState)))
             {
                 requestedState = (IStateWithPayload<TPayload>) States[typeof(TState)];
             }
-            else return UniTask.FromResult(TransitionResult.Invalid());
+            else return await UniTask.FromResult(TransitionResult.Invalid());
 
-            CurrentState?.Exit();
-            requestedState.Enter(payload);
+            if (CurrentState != null)
+                await CurrentState.Exit();
             CurrentState = requestedState;
-            return UniTask.FromResult(TransitionResult.Valid());
+            await requestedState.Enter(payload);
+            return await UniTask.FromResult(TransitionResult.Valid());
         }
     }
 }

@@ -116,7 +116,7 @@ Rigidbody:
   m_GameObject: {fileID: 1537715323721855029}
   serializedVersion: 4
   m_Mass: 75
-  m_Drag: 1
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -144,8 +144,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6141827633707460567}
   m_Layer: 0
-  m_Name: CameraHandle
-  m_TagString: Untagged
+  m_Name: Head
+  m_TagString: Head
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

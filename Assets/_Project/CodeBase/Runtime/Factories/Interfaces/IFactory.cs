@@ -12,7 +12,7 @@
     
     public interface IFactory<T, TParam1, TParam2>
     {
-        public T Create(TParam1 param1, TParam2 param2);
+        public T Create(TParam1 playerPrefab, TParam2 spawnPoint);
     }
     
     public interface IFactory<T, TParam1, TParam2, TParam3>

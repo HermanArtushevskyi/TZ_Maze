@@ -15,7 +15,7 @@ MonoBehaviour:
   Stats:
     Health: 3
     Damage: 1
-    Speed: 200
-    RunSpeed: 275
+    Speed: 60
+    RunSpeed: 100
     AttackRange: 2
     AttackRate: 1.5

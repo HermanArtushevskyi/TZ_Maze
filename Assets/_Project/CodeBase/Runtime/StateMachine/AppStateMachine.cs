@@ -13,10 +13,9 @@ namespace _Project.CodeBase.Runtime.StateMachine
             States.Add(typeof(MainLoopState), new MainLoopState(sceneLoader));
         }
 
-        public override UniTask Initialize()
+        public override async UniTask Initialize()
         {
-            Enter<BootState>();
-            return UniTask.CompletedTask;
+            await Enter<BootState>();
         }
     }
 }

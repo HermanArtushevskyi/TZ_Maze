@@ -1,7 +1,9 @@
-﻿namespace _Project.CodeBase.Runtime.Services.AudioService.Interfaces
+﻿using UnityEngine;
+
+namespace _Project.CodeBase.Runtime.Services.AudioService.Interfaces
 {
-    public class IAudioProvider
+    public interface IAudioProvider
     {
-        
+        public IAudioAsset Play(string audioName, GameObject emitter = null);
     }
 }

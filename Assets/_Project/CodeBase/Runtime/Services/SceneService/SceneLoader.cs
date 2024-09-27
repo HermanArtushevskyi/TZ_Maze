@@ -2,6 +2,7 @@
 using System.Threading;
 using _Project.CodeBase.Runtime.Services.SceneService.Interfaces;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace _Project.CodeBase.Runtime.Services.SceneService
@@ -17,22 +18,19 @@ namespace _Project.CodeBase.Runtime.Services.SceneService
             OnSceneLoaded?.Invoke(sceneName);
         }
 
-        public UniTask LoadSceneAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single, bool autoActivate = true,
+        public async UniTask LoadSceneAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single,
             IProgress<float> progress = null, CancellationToken cancellationToken = default)
         {
-            var asyncOperation = SceneManager.LoadSceneAsync(sceneName, mode);
-            asyncOperation.allowSceneActivation = autoActivate;
-            asyncOperation.completed += operation => OnSceneLoaded?.Invoke(sceneName);
-            UniTask uniTask = asyncOperation.ToUniTask(progress: progress, cancellationToken: cancellationToken);
-            return uniTask;
+            UniTask uniTask = SceneManager.LoadSceneAsync(sceneName, mode).ToUniTask(progress: progress, cancellationToken: cancellationToken);
+            await uniTask;
         }
 
-        public UniTask UnloadSceneAsync(string sceneName, IProgress<float> progress = null, CancellationToken cancellationToken = default)
+        public async UniTask UnloadSceneAsync(string sceneName, IProgress<float> progress = null, CancellationToken cancellationToken = default)
         {
             var asyncOperation = SceneManager.UnloadSceneAsync(sceneName);
             asyncOperation.completed += operation => OnSceneUnloaded?.Invoke(sceneName);
             UniTask uniTask = asyncOperation.ToUniTask(progress: progress, cancellationToken: cancellationToken);
-            return uniTask;
+            await uniTask;
         }
     }
 }

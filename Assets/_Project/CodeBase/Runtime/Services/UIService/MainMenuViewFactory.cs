@@ -1,4 +1,5 @@
 ﻿using _Project.CodeBase.Runtime.Services.UIService.Interfaces;
+using _Project.CodeBase.Runtime.Services.UIService.MainMenu;
 using UnityEngine;
 using Zenject;
 
@@ -23,6 +24,7 @@ namespace _Project.CodeBase.Runtime.Services.UIService
             IView view = base.Create(viewPrefab, out _);
             view.Canvas.worldCamera = _camera;
             _container.Bind<IView>().FromInstance(view).AsSingle();
+            _container.Instantiate<MainMenuPresenter>().BindView();
             return view;
         }
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4329385502499506910}
   - component: {fileID: 4921997807657644486}
   - component: {fileID: 3130328549612213676}
+  - component: {fileID: -7304623425429389436}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -72,5 +73,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 843ad6e0997345709dbe8840b4bbdaae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerStats: {fileID: 11400000, guid: 9a1eebb6c860df04eb890c5810c3a40c, type: 2}
+  _monoContext: {fileID: -7304623425429389436}
+  _audioName: {fileID: 11400000, guid: 2d21704463dde9a4885206db54439ef2, type: 2}
+  _curtainPrefab: {fileID: 2836018220778316143, guid: ec6a4fc178a916246b6b38a0c9d71836,
+    type: 3}
+--- !u!114 &-7304623425429389436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034963858057830546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b42c293779e4a1dbe74f0dc5ea353f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

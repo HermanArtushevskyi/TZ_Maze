@@ -21,7 +21,7 @@ namespace _Project.CodeBase.Runtime.StateMachine.States.AppStates
             IProgress<float> sceneLoadingProgress = null;
             if (Application.isEditor)
                 sceneLoadingProgress = new Progress<float>(ProgressHandler);
-            _sceneLoader.LoadSceneAsync(SceneName.MAIN_MENU, progress: sceneLoadingProgress);
+            await _sceneLoader.LoadSceneAsync(SceneName.MAIN_MENU, progress: sceneLoadingProgress);
             await UniTask.CompletedTask;
         }
 

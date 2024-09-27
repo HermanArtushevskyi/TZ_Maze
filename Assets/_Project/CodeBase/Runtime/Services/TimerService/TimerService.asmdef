@@ -1,0 +1,4 @@
+﻿{
+  "name": "TimerService",
+  "references":[ "GUID:d82cbd9fb733459e946986d0b31c48ee" ]
+}

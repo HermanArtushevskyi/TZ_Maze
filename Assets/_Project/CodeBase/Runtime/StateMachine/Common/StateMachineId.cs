@@ -2,6 +2,7 @@
 {
     public enum StateMachineId
     {
-        App
+        App,
+        Game
     }
 }
