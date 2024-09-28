@@ -9,7 +9,6 @@ using _Project.CodeBase.Runtime.Services.UIService.Common;
 using _Project.CodeBase.Runtime.UnityContext.Interfaces;
 using InputService.Common;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.CodeBase.Runtime.Gameplay.Character
 {
