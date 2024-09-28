@@ -5,8 +5,8 @@ namespace _Project.CodeBase.Runtime.Gameplay.Character.Common
     [CreateAssetMenu(fileName = "PlayerStats", menuName = "ScriptableObjects/PlayerStats", order = 1)]
     public class ScriptablePlayerStats: ScriptableObject
     {
-        public PlayerStats Stats;
+        [SerializeField] private PlayerStats _stats;
         
-        public PlayerStats GetStats() => Stats;
+        public PlayerStats GetStats() => _stats;
     }
 }

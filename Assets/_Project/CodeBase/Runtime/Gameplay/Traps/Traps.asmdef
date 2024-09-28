@@ -1,3 +1,4 @@
 ﻿{
-  "name": "Traps"
+  "name": "Traps",
+  "references":[ "GUID:59416942d56a02449bf575a8faccfa65", "GUID:8fa41e8d99754ca290bd23a5fc3de1b6", "GUID:9202321db32b4ae4845824a9165c9a1e" ]
 }

@@ -8,9 +8,17 @@ namespace _Project.CodeBase.Runtime.Services.TimerService
     public class Timer : ITimer
     {
         private readonly List<Stopwatch> _timers = new List<Stopwatch>();
+        private readonly Queue<int> _freeIds = new Queue<int>();
         
         public int StartTimer()
         {
+            if (_freeIds.Count > 0)
+            {
+                int freeId = _freeIds.Dequeue();
+                _timers[freeId].Start();
+                return freeId;
+            }
+            
             Stopwatch timer = new Stopwatch();
             timer.Start();
             _timers.Add(timer);
@@ -20,6 +28,8 @@ namespace _Project.CodeBase.Runtime.Services.TimerService
         public void StopTimer(int timerId)
         {
             _timers[timerId].Stop();
+            _timers[timerId].Reset();
+            _freeIds.Enqueue(timerId);
         }
 
         public void PauseTimer(int timerId)

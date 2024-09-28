@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f15c6c070b4073b330b55d2bf24569, type: 3}
   m_Name: DefaultPlayerStats
   m_EditorClassIdentifier: 
-  Stats:
-    Health: 3
+  _stats:
+    Health: 1
     Damage: 1
-    Speed: 60
-    RunSpeed: 100
-    AttackRange: 2
-    AttackRate: 1.5
+    Speed: 85
+    RunSpeed: 150
+    AttackRange: 1
+    AttackRate: 1

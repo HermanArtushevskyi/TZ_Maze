@@ -12,10 +12,10 @@
     "_tempCollidersAction": 1,
     "_paletteManager": {
         "_selectedPaletteIdx": 0,
-        "_selectedBrushIdx": 39,
+        "_selectedBrushIdx": 126,
         "_showBrushName": false,
         "_viewList": false,
-        "_showTabsInMultipleRows": false,
+        "_showTabsInMultipleRows": true,
         "_iconSize": 47
     },
     "pinManager": {
@@ -456,7 +456,10 @@
                     "EditorOnly",
                     "MainCamera",
                     "Player",
-                    "GameController"
+                    "GameController",
+                    "CinemachineVC",
+                    "Head",
+                    "Spawnpoint"
                 ],
                 "_slopeFilter": {
                     "_v1": 0.0,
@@ -55644,7 +55647,10 @@
                     "EditorOnly",
                     "MainCamera",
                     "Player",
-                    "GameController"
+                    "GameController",
+                    "CinemachineVC",
+                    "Head",
+                    "Spawnpoint"
                 ]
             }
         ],

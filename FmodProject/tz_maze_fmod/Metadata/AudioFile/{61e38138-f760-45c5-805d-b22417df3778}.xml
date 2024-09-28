@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{61e38138-f760-45c5-805d-b22417df3778}">
+		<property name="assetPath">
+			<value>zapsplat_foley_small_pile_letters_post_pick_up_from_floor_004_111530.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.83999999999999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{0dda74b8-b112-4154-8060-9756c70f434e}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,5 +1,6 @@
 ﻿using _Project.CodeBase.Runtime.Factories;
 using _Project.CodeBase.Runtime.Gameplay.Character.Common;
+using _Project.CodeBase.Runtime.Gameplay.Levels.Common;
 using _Project.CodeBase.Runtime.Services.AudioService;
 using _Project.CodeBase.Runtime.Services.AudioService.Common;
 using _Project.CodeBase.Runtime.Services.AudioService.Interfaces;
@@ -14,6 +15,7 @@ using _Project.CodeBase.Runtime.StateMachine.Common;
 using _Project.CodeBase.Runtime.StateMachine.Interfaces;
 using _Project.CodeBase.Runtime.UnityContext;
 using _Project.CodeBase.Runtime.UnityContext.Interfaces;
+using InputService.Common;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +24,7 @@ namespace _Project.CodeBase.Runtime.DI.Global
     public class GlobalDependenciesInstaller : MonoInstaller
     {
         [SerializeField] private ScriptablePlayerStats _playerStats;
+        [SerializeField] private ScriptableLevelSettings _levelSettings;
         [SerializeField] private MonoContext _monoContext;
         [SerializeField] private AudioName _audioName;
         [SerializeField] private GameObject _curtainPrefab;
@@ -36,12 +39,10 @@ namespace _Project.CodeBase.Runtime.DI.Global
             BindInput();
             BindAudio();
             BindConfigs();
+            BindLevelSettings();
         }
 
-        private void BindTimerService()
-        {
-            Container.Bind<ITimer>().To<Timer>().AsSingle();
-        }
+        private void BindTimerService() => Container.Bind<ITimer>().To<Timer>().AsSingle();
 
         private void BindMonoContext() => Container.Bind(typeof(IUpdate), typeof(IFixedUpdate)).FromInstance(_monoContext).AsSingle();
 
@@ -61,9 +62,11 @@ namespace _Project.CodeBase.Runtime.DI.Global
 
         private void BindInput()
         {
+            InputActions inputActions = new InputActions();
+            Container.Bind<InputActions>().FromInstance(inputActions).AsSingle();
             IInputProvider inputProvider = new InputProvider();
             inputProvider.AddSource(new InputClearer());
-            inputProvider.AddSource(new UnityInputSource());
+            inputProvider.AddSource(new UnityInputSource(inputActions));
             Container.Bind<IInputProvider>().FromInstance(inputProvider).AsSingle();
         }
 
@@ -80,5 +83,7 @@ namespace _Project.CodeBase.Runtime.DI.Global
             #endif
             Container.Bind<PlayerStats>().FromInstance(_playerStats.GetStats()).AsSingle();
         }
+
+        private void BindLevelSettings() => Container.Bind<LevelSettings>().FromInstance(_levelSettings.GetSettings()).AsSingle();
     }
 }

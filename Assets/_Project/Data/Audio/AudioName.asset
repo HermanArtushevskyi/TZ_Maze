@@ -19,3 +19,31 @@ MonoBehaviour:
       Data3: 341165449
       Data4: 859456378
     Path: event:/UI/Click
+  PlayerFootsteps:
+    Guid:
+      Data1: 2019705286
+      Data2: 1165016031
+      Data3: 106707121
+      Data4: 103711289
+    Path: event:/Player/Footsteps
+  ScrollUnroll:
+    Guid:
+      Data1: 10022742
+      Data2: 1301489813
+      Data3: -1540347478
+      Data4: 548573037
+    Path: event:/Player/ScrollUnroll
+  SpikeTrap:
+    Guid:
+      Data1: 1639511769
+      Data2: 1203857994
+      Data3: -2056035966
+      Data4: 53458879
+    Path: event:/Traps/Spikes
+  OnDeath:
+    Guid:
+      Data1: -1247435649
+      Data2: 1194424478
+      Data3: 1490391434
+      Data4: -472111688
+    Path: event:/Player/Death

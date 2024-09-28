@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{0eb24f06-bb0f-4293-9f5b-000a3e9041d2}">
+		<property name="assetPath">
+			<value>zapsplat_horror_evp_ghostbox_glitchy_ghostly_demon_voice_says_death_002_71041.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.74399999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{0dda74b8-b112-4154-8060-9756c70f434e}</destination>
+		</relationship>
+	</object>
+</objects>

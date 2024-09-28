@@ -36,7 +36,7 @@ namespace _Project.CodeBase.Runtime.Services.UIService.MainMenu
         {
             _audioProvider.Play(_audioName.UIClickSound);
             UniTask curtainTask = _curtain.Close();
-            UniTask.WhenAll(curtainTask);
+            await UniTask.WhenAll(curtainTask);
             await _sceneLoader.LoadSceneAsync(SceneName.GAME);
         }
 

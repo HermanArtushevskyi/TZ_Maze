@@ -9,9 +9,9 @@ namespace _Project.CodeBase.Runtime.Services.InputService
         public int Priority => 1;
         private readonly InputActions _inputActions;
         
-        public UnityInputSource()
+        public UnityInputSource(InputActions inputActions)
         {
-            _inputActions = new InputActions();
+            _inputActions = inputActions;
             _inputActions.Enable();
         }
         

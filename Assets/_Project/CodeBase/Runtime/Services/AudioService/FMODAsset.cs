@@ -20,6 +20,16 @@ namespace _Project.CodeBase.Runtime.Services.AudioService
             _eventInstance.start();
         }
 
+        public void Pause()
+        {
+            _eventInstance.setPaused(true);
+        }
+
+        public void Unpause()
+        {
+            _eventInstance.setPaused(false);
+        }
+
         public void Stop()
         {
             _eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -28,6 +38,14 @@ namespace _Project.CodeBase.Runtime.Services.AudioService
         public void Kill()
         {
             _eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+
+        public void SetParameter(string name, float value)
+        {
+            if (name == "Pitch") _eventInstance.setPitch(value);
+
+            else
+                _eventInstance.setParameterByName(name, value);
         }
     }
 }

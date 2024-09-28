@@ -6,8 +6,11 @@ namespace _Project.CodeBase.Runtime.Gameplay.Items
     [RequireComponent(typeof(Collider))]
     public abstract class InteractableBase : MonoBehaviour, IInteractable
     {
-        public const string InteractableLayer = "Interactable";
+        public string HintText => _hintText;
         
+        protected const string InteractableLayer = "Interactable";
+        [SerializeField] protected string _hintText;
+
         public abstract void Interact();
 
         protected virtual void Awake()

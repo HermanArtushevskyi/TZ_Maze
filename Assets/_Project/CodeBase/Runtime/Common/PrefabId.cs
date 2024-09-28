@@ -3,6 +3,8 @@
     public enum PrefabId
     {
         Player,
-        UI
+        UI,
+        VirtualCamera,
+        Level
     }
 }

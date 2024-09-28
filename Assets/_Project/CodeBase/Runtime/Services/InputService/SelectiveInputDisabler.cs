@@ -1,6 +1,7 @@
 ﻿using _Project.CodeBase.Runtime.Services.InputService.Interfaces;
 using InputService.Common;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Project.CodeBase.Runtime.Services.InputService
 {

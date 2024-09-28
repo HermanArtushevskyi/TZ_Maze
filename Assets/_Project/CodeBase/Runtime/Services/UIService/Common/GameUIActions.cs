@@ -2,12 +2,14 @@
 
 namespace _Project.CodeBase.Runtime.Services.UIService.Common
 {
-    public class GameUIActions
+    public sealed class GameUIActions
     {
         public event Action OnPause;
         public event Action<string> OnDead;
+        public event Action OnWin;
         public event Action<string> OnOpenScroll;
         public event Action<string> OnChangeHint;
+        public Func<TimeSpan> GetTime;
         
         public void CallPause()
         {
@@ -27,6 +29,11 @@ namespace _Project.CodeBase.Runtime.Services.UIService.Common
         public void CallDead(string reason)
         {
             OnDead?.Invoke(reason);
+        }
+
+        public void CallWin()
+        {
+            OnWin?.Invoke();
         }
     }
 }
