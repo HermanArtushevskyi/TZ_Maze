@@ -1,4 +1,4 @@
 ﻿{
   "name": "Items",
-  "references":[ "GUID:1e64c92d1b2946c196a60522003b9e37", "GUID:a5b93c251f3448f4b9afc65e890662ea" ]
+  "references":[ "GUID:1e64c92d1b2946c196a60522003b9e37", "GUID:a5b93c251f3448f4b9afc65e890662ea", "GUID:2812df2c72204d6a851273ddb6de0b17", "GUID:8fa41e8d99754ca290bd23a5fc3de1b6", "GUID:9202321db32b4ae4845824a9165c9a1e" ]
 }

@@ -1,5 +1,8 @@
 ﻿using _Project.CodeBase.Runtime.Common;
 using _Project.CodeBase.Runtime.Gameplay.Character.Interfaces;
+using _Project.CodeBase.Runtime.Gameplay.Enemies.Interfaces;
+using _Project.CodeBase.Runtime.Gameplay.Levels.Common;
+using _Project.CodeBase.Runtime.Gameplay.Levels.Interfaces;
 using _Project.CodeBase.Runtime.Services.AudioService.Common;
 using _Project.CodeBase.Runtime.Services.AudioService.Interfaces;
 using _Project.CodeBase.Runtime.Services.InputService;
@@ -23,29 +26,36 @@ namespace _Project.CodeBase.Runtime.Services.UIService.Game
         private readonly GameUIActions _gameUIActions;
         private readonly IPlayer _player;
         private readonly IUpdate _update;
+        private readonly IKeyCounter _keyCounter;
         private readonly IInputProvider _inputProvider;
         private readonly InputActions _inputActions;
         private readonly IAudioProvider _audioProvider;
         private readonly AudioName _audioNames;
         private readonly ISceneLoader _sceneLoader;
+        private readonly LevelSettings _levelSettings;
+        private readonly IEnemyProvider _enemyProvider;
         private readonly SelectiveInputDisabler _inputDisabler;
         private readonly CinemachineInputProvider _cinemachineInputProvider;
         
         private bool _isPaused;
         
-        public GamePresenter(IView gameView, GameUIActions gameUIActions, IPlayer player, IUpdate update,
+        public GamePresenter(IView gameView, GameUIActions gameUIActions, IPlayer player, IUpdate update, IKeyCounter keyCounter,
             IInputProvider inputProvider, InputActions inputActions, [InjectOptional(Id = PrefabId.VirtualCamera)] GameObject virtualCameraGO,
-            IAudioProvider audioProvider, AudioName audioNames, ISceneLoader sceneLoader)
+            IAudioProvider audioProvider, AudioName audioNames, ISceneLoader sceneLoader, LevelSettings levelSettings,
+            IEnemyProvider enemyProvider)
         {
             _gameView = (GameView) gameView;
             _gameUIActions = gameUIActions;
             _player = player;
             _update = update;
+            _keyCounter = keyCounter;
             _inputProvider = inputProvider;
             _inputActions = inputActions;
             _audioProvider = audioProvider;
             _audioNames = audioNames;
             _sceneLoader = sceneLoader;
+            _levelSettings = levelSettings;
+            _enemyProvider = enemyProvider;
             _inputDisabler = new SelectiveInputDisabler(new SelectiveInputDisabler.DisabledInput()
             {
                 ActionInput = true,
@@ -83,6 +93,11 @@ namespace _Project.CodeBase.Runtime.Services.UIService.Game
                 // Settings timer text in format 00:00
                 _gameView.TimeText.text = _gameUIActions.GetTime().ToString("mm':'ss");
             }
+
+            if (_keyCounter != null)
+            {
+                _gameView.KeysText.text = $"{_keyCounter.GetAmountOfGatheredKeys()}/{_keyCounter.GetAmountOfNeededKeys()}";
+            }
         }
 
         private void OpenScroll(string text)
@@ -105,6 +120,7 @@ namespace _Project.CodeBase.Runtime.Services.UIService.Game
 
         private void OnDead(string deathReason)
         {
+            _enemyProvider.GetEnemy().CanMove = false;
             _audioProvider.Play(_audioNames.OnDeathSound);
             TurnOnSinglePanel(_gameView.ResultPanel);
             _gameView.ResultText.text = "Dead";
@@ -148,7 +164,8 @@ namespace _Project.CodeBase.Runtime.Services.UIService.Game
                 UnPause();
                 return;
             }
-            
+
+            _enemyProvider.GetEnemy().CanMove = false;
             _audioProvider.Play(_audioNames.UIClickSound);
             TurnOnSinglePanel(_gameView.PausePanel);
             Cursor.lockState = CursorLockMode.None;
@@ -159,6 +176,7 @@ namespace _Project.CodeBase.Runtime.Services.UIService.Game
 
         private void UnPause()
         {
+            _enemyProvider.GetEnemy().CanMove = true;
             _audioProvider.Play(_audioNames.UIClickSound);
             TurnOnSinglePanel(_gameView.MainPanel);
             Cursor.lockState = CursorLockMode.Locked;

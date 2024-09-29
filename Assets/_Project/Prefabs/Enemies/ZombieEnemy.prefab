@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4534470024989290049}
   m_Layer: 0
   m_Name: ZombieEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,14 +49,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.23890015
+  m_Radius: 0.460188
   m_Height: 3.1169446
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5699519, z: 0.062439173}
+  m_Center: {x: -0.15909627, y: 1.5699519, z: 0.06583235}
 --- !u!195 &4534470024989290049
 NavMeshAgent:
   m_ObjectHideFlags: 0

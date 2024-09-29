@@ -1,5 +1,7 @@
 ﻿using System;
+using _Project.CodeBase.Runtime.Common;
 using _Project.CodeBase.Runtime.Gameplay.Character.Interfaces;
+using _Project.CodeBase.Runtime.Gameplay.Enemies.Interfaces;
 using _Project.CodeBase.Runtime.Gameplay.Items.Interfaces;
 using _Project.CodeBase.Runtime.Gameplay.Traps.Interfaces;
 using _Project.CodeBase.Runtime.Services.AudioService.Common;
@@ -15,8 +17,9 @@ namespace _Project.CodeBase.Runtime.Gameplay.Character
     public class CharacterController : ICharacterController
     {
         public event Action<string> OnDeath;
-        
+
         public IPlayer Player { get; private set; }
+        public AABB PlayerAABB { get; set; }
 
         private Rigidbody _rigidbody;
         private readonly IInputProvider _inputProvider;
@@ -24,23 +27,27 @@ namespace _Project.CodeBase.Runtime.Gameplay.Character
         private readonly GameUIActions _gameUIActions;
         private readonly IAudioProvider _audioProvider;
         private readonly AudioName _audioNames;
+        private readonly IEnemyProvider _enemyProvider;
         private readonly LayerMask _interactableLayerMask = LayerMask.GetMask(InteractableLayerName);
-        
+
         private IAudioAsset _footstepsAudio;
         private float _lastPitch = 1f;
-        
+
         private const float WalkPitch = 1f;
         private const float RunPitch = 1.5f;
         private const string InteractableLayerName = "Interactable";
+        private const string EnemyTag = "Enemy";
 
         public CharacterController(IInputProvider inputProvider, IFixedUpdate fixedUpdate, GameUIActions gameUIActions,
-            IAudioProvider audioProvider, AudioName audioNames)
+            IAudioProvider audioProvider, AudioName audioNames, IEnemyProvider enemyProvider)
         {
             _inputProvider = inputProvider;
             _fixedUpdate = fixedUpdate;
             _gameUIActions = gameUIActions;
             _audioProvider = audioProvider;
             _audioNames = audioNames;
+            _enemyProvider = enemyProvider;
+            PlayerAABB = new AABB();
         }
 
         public void SetPlayer(IPlayer player)
@@ -58,14 +65,20 @@ namespace _Project.CodeBase.Runtime.Gameplay.Character
 
         private void OnPlayerTriggered(Collider obj)
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Debug.Log($"Player entered trigger: {obj.name}");
-            #endif
-            
+#endif
+
             if (obj.TryGetComponent(out ITrap trap))
             {
                 trap.Trigger();
                 OnDeath?.Invoke(trap.GetDeathMessage());
+            }
+
+            if (obj.CompareTag(EnemyTag))
+            {
+                string deathMsg = _enemyProvider.GetEnemy().GetDeathMessage();
+                OnDeath?.Invoke(deathMsg);
             }
         }
 
@@ -76,10 +89,25 @@ namespace _Project.CodeBase.Runtime.Gameplay.Character
                 _fixedUpdate.OnFixedUpdate -= OnFixedUpdate;
                 return;
             }
-            
+
             RawInput input = _inputProvider.GetInput();
+            GetAABB();
             Move(input);
             CheckInteractions(input);
+        }
+
+        private void GetAABB()
+        {
+            Vector3 position = Player.SceneObject.transform.position;
+            Vector3 size = Player.SceneObject.transform.localScale;
+            Vector3 leftBottomBack = position - size;
+            Vector3 rightTopFront = position + size;
+            PlayerAABB = new AABB(leftBottomBack, rightTopFront);
+            
+            #if UNITY_EDITOR
+            // DEBUG AABB
+            MyMath.DrawAABB(PlayerAABB, Color.yellow);
+            #endif
         }
 
         private void Move(RawInput input)
@@ -95,10 +123,10 @@ namespace _Project.CodeBase.Runtime.Gameplay.Character
             RawInput inputData = input;
             Vector3 movementInput = new Vector3(inputData.MovementDirection.x, 0, inputData.MovementDirection.y);
             movementInput.Normalize();
-            
+
             float speed = inputData.IsRunning ? Player.Stats.RunSpeed : Player.Stats.Speed;
             movementInput *= speed;
-            
+
             Vector3 movement = (cameraRightVector * movementInput.x) + (cameraLookVector * movementInput.z);
 
             if (movement.sqrMagnitude > 0)
@@ -117,14 +145,12 @@ namespace _Project.CodeBase.Runtime.Gameplay.Character
             }
             else
                 _footstepsAudio.Pause();
-            
-            
-            #if UNITY_EDITOR
+
+
+#if UNITY_EDITOR
             Debug.DrawRay(Player.SceneObject.transform.position, cameraLookVector, Color.green);
             Debug.DrawRay(Player.SceneObject.transform.position, movement, Color.red);
-            Debug.Log($"Input: {inputData.MovementDirection}");
-            Debug.Log($"Player movement: {movement}");
-            #endif
+#endif
             _rigidbody.AddForce(movement, ForceMode.Impulse);
         }
 

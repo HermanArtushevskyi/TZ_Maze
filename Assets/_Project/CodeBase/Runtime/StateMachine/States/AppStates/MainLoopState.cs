@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace _Project.CodeBase.Runtime.StateMachine.States.AppStates
 {
-    public struct MainLoopState : IState
+    public class MainLoopState : IState
     {
         private readonly ISceneLoader _sceneLoader;
         

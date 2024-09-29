@@ -15,7 +15,6 @@ namespace _Project.CodeBase.Runtime.StateMachine.States.GameStates
 
         public async UniTask Enter()
         {
-            _gameUIActions.CallWin();
             await UniTask.CompletedTask;
         }
 

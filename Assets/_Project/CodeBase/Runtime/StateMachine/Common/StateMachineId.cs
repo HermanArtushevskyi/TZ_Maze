@@ -3,6 +3,7 @@
     public enum StateMachineId
     {
         App,
-        Game
+        Game,
+        Enemy
     }
 }

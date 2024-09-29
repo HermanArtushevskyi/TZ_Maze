@@ -1,6 +1,9 @@
-﻿using _Project.CodeBase.Runtime.Common;
+﻿using System.Collections.Generic;
+using _Project.CodeBase.Runtime.Common;
 using _Project.CodeBase.Runtime.Gameplay.Character;
 using _Project.CodeBase.Runtime.Gameplay.Character.Interfaces;
+using _Project.CodeBase.Runtime.Gameplay.Enemies;
+using _Project.CodeBase.Runtime.Gameplay.Enemies.Interfaces;
 using _Project.CodeBase.Runtime.Gameplay.Levels;
 using _Project.CodeBase.Runtime.Gameplay.Levels.Common;
 using _Project.CodeBase.Runtime.Gameplay.Levels.Interfaces;
@@ -24,6 +27,8 @@ namespace _Project.CodeBase.Runtime.DI.Game
         [SerializeField] private Camera _camera;
         [SerializeField] private GameObject _virtualCamera;
         [SerializeField] private GameObject _levelPrefab;
+
+        private const string LevelTag = "Level";
         
         public override void InstallBindings()
         {
@@ -32,6 +37,7 @@ namespace _Project.CodeBase.Runtime.DI.Game
             BindCamera();
             BindStateMachine();
             BindLevel();
+            BindEnemy();
         }
 
         private void BindPlayer()
@@ -65,10 +71,10 @@ namespace _Project.CodeBase.Runtime.DI.Game
             LevelSettings levelSettings = Container.Resolve<LevelSettings>();
             Container.Bind<ILevel>().To<Level>().AsSingle();
             Container.Bind<IKeyCounter>().To<KeyCounter>().AsSingle();
-            
+            Container.Bind<List<IPlaceOfInterest>>().To<List<IPlaceOfInterest>>().AsSingle();
             if (levelSettings.GenerationMethod == LevelGenerationMethod.OnScene)
             {
-                Container.Bind<GameObject>().WithId(PrefabId.Level).FromInstance(_levelPrefab).AsCached();
+                Container.Bind<GameObject>().WithId(PrefabId.Level).FromInstance(GameObject.FindWithTag(LevelTag)).AsCached();
                 Container.Bind<IFactories.IFactory<ILevel>>().To<OnSceneLevelFactory>().AsSingle();
             }
             else
@@ -81,6 +87,13 @@ namespace _Project.CodeBase.Runtime.DI.Game
             {
                 Debug.LogError("Level generation method is not implemented");
             }
+        }
+
+        private void BindEnemy()
+        {
+            Container.Bind<IEnemyProvider>().To<EnemyProvider>().AsSingle();
+            Container.Bind<IFactories.IFactory<IEnemy>>().To<EnemyFactory>().AsSingle();
+            Container.Bind<IStateMachine>().WithId(StateMachineId.Enemy).To<EnemyStateMachine>().AsCached();
         }
     }
 }

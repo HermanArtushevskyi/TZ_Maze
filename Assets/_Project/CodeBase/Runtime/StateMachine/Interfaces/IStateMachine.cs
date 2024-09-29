@@ -10,5 +10,6 @@ namespace _Project.CodeBase.Runtime.StateMachine.Interfaces
         public UniTask Initialize();
         public UniTask<TransitionResult> Enter<TState>() where TState : IState;
         public UniTask<TransitionResult> Enter<TState, TPayload>(TPayload payload) where TState : IStateWithPayload<TPayload>;
+        public UniTask Shutdown();
     }
 }

@@ -66,20 +66,6 @@ namespace _Project.CodeBase.Tests.StateMachine
             Assert.AreEqual(TransitionResult.Invalid(), result);
             Assert.AreEqual(typeof(TestState1), _stateMachine.CurrentState.GetType());
         }
-        
-        /// <summary>
-        /// Testing same state transition.
-        /// If transition is requested to the current state, result must be invalid, and the current state must not change.
-        /// </summary>
-        /// <returns></returns>
-        [Test]
-        public async void Test_same_state_transition()
-        {
-            await _stateMachine.Initialize();
-            TransitionResult result = await _stateMachine.Enter<TestState1>();
-            Assert.AreEqual(TransitionResult.Invalid(), result);
-            Assert.AreEqual(typeof(TestState1), _stateMachine.CurrentState.GetType());
-        }
     }
 
     internal class TestStateMachine : StateMachineBase

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e5b2a494ea46fe9292640fd560cb85, type: 3}
+  m_Name: EnemyConfig
+  m_EditorClassIdentifier: 
+  _config:
+    FOV: 45
+    ViewDistance: 17
+    ChaseDistance: 22
+    WanderingSpeed: 10
+    ChasingSpeed: 15
+    Prefab: {fileID: 8661683068289899506, guid: 9772a444538708c49bea13a81991b02b,
+      type: 3}

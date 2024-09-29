@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86aa0bcac7840508d29c3b93acdd2f3, type: 3}
   m_Name: AudioName
   m_EditorClassIdentifier: 
+  Ambient:
+    Guid:
+      Data1: -1746295929
+      Data2: 1085836024
+      Data3: 497535668
+      Data4: 1980796325
+    Path: event:/Ambient
   UIClick:
     Guid:
       Data1: 2131903181
@@ -47,3 +54,38 @@ MonoBehaviour:
       Data3: 1490391434
       Data4: -472111688
     Path: event:/Player/Death
+  EnemyFootsteps:
+    Guid:
+      Data1: 2134021259
+      Data2: 1138890645
+      Data3: 483810987
+      Data4: 247760720
+    Path: event:/Enemy/Footsteps
+  Breath:
+    Guid:
+      Data1: 1803221287
+      Data2: 1219510070
+      Data3: 87894674
+      Data4: 854925396
+    Path: event:/Player/Breath
+  KeyFound:
+    Guid:
+      Data1: -1414346074
+      Data2: 1242519216
+      Data3: -443489135
+      Data4: 213499716
+    Path: event:/UI/KeyPickedUp
+  LockedDoor:
+    Guid:
+      Data1: -2144682535
+      Data2: 1265458979
+      Data3: -384131940
+      Data4: -1873945377
+    Path: event:/Doors/Locked
+  UnlockedDoor:
+    Guid:
+      Data1: -937020033
+      Data2: 1249110433
+      Data3: -1959039076
+      Data4: -586188783
+    Path: event:/Doors/Open

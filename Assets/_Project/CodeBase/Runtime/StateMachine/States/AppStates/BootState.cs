@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 
 namespace _Project.CodeBase.Runtime.StateMachine.States.AppStates
 {
-    public struct BootState : IState
+    public class BootState : IState
     {
         private readonly IStateMachine _stateMachine;
 

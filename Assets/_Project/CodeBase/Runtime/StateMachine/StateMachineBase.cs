@@ -15,10 +15,8 @@ namespace _Project.CodeBase.Runtime.StateMachine
 
         public virtual async UniTask<TransitionResult> Enter<TState>() where TState : IState
         {
-            if (typeof(TState) == CurrentState?.GetType())
-                return await UniTask.FromResult(TransitionResult.Invalid());
-            
             IState requestedState;
+            
             if (States.ContainsKey(typeof(TState)))
             {
                 requestedState = (IState) States[typeof(TState)];
@@ -27,6 +25,7 @@ namespace _Project.CodeBase.Runtime.StateMachine
 
             if (CurrentState != null)
                 await CurrentState.Exit();
+            
             CurrentState = requestedState;
             await requestedState.Enter();
             return await UniTask.FromResult(TransitionResult.Valid());
@@ -34,10 +33,8 @@ namespace _Project.CodeBase.Runtime.StateMachine
 
         public virtual async UniTask<TransitionResult> Enter<TState, TPayload>(TPayload payload) where TState : IStateWithPayload<TPayload>
         {
-            if (typeof(TState) == CurrentState?.GetType())
-                return await UniTask.FromResult(TransitionResult.Invalid());
-            
             IStateWithPayload<TPayload> requestedState;
+            
             if (States.ContainsKey(typeof(TState)))
             {
                 requestedState = (IStateWithPayload<TPayload>) States[typeof(TState)];
@@ -46,9 +43,18 @@ namespace _Project.CodeBase.Runtime.StateMachine
 
             if (CurrentState != null)
                 await CurrentState.Exit();
+            
             CurrentState = requestedState;
             await requestedState.Enter(payload);
             return await UniTask.FromResult(TransitionResult.Valid());
+        }
+
+        public virtual async UniTask Shutdown()
+        {
+            if (CurrentState != null)
+                await CurrentState.Exit();
+            
+            await UniTask.CompletedTask;
         }
     }
 }

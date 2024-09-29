@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerStats: {fileID: 11400000, guid: 9a1eebb6c860df04eb890c5810c3a40c, type: 2}
   _levelSettings: {fileID: 11400000, guid: 044fc577e8882364aae6a7484939c3d1, type: 2}
+  _enemyConfig: {fileID: 11400000, guid: d47c40993534e0f4eb3637c506682cf1, type: 2}
   _monoContext: {fileID: -7304623425429389436}
   _audioName: {fileID: 11400000, guid: 2d21704463dde9a4885206db54439ef2, type: 2}
   _curtainPrefab: {fileID: 2836018220778316143, guid: ec6a4fc178a916246b6b38a0c9d71836,

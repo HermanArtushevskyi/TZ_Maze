@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.CodeBase.Runtime.StateMachine.States.AppStates
 {
-    public struct ExitState : IState
+    public class ExitState : IState
     {
         public async UniTask Enter()
         {

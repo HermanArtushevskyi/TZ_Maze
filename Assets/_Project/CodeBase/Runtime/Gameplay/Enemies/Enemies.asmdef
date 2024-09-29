@@ -1,3 +1,4 @@
 ﻿{
-  "name": "Enemies"
+  "name": "Enemies",
+  "references":[ "GUID:8ebb7ecee3ad43c5b51fe226e9c90807", "GUID:0a83336c08404e5ba9d904a24690189b", "GUID:5b6c79a4e6634bd184a9f2dbe04cc0ea" ]
 }

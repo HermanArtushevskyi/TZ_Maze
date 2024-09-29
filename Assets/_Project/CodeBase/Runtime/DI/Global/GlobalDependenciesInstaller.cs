@@ -1,5 +1,6 @@
 ﻿using _Project.CodeBase.Runtime.Factories;
 using _Project.CodeBase.Runtime.Gameplay.Character.Common;
+using _Project.CodeBase.Runtime.Gameplay.Enemies.Common;
 using _Project.CodeBase.Runtime.Gameplay.Levels.Common;
 using _Project.CodeBase.Runtime.Services.AudioService;
 using _Project.CodeBase.Runtime.Services.AudioService.Common;
@@ -25,6 +26,7 @@ namespace _Project.CodeBase.Runtime.DI.Global
     {
         [SerializeField] private ScriptablePlayerStats _playerStats;
         [SerializeField] private ScriptableLevelSettings _levelSettings;
+        [SerializeField] private ScriptableEnemyConfig _enemyConfig;
         [SerializeField] private MonoContext _monoContext;
         [SerializeField] private AudioName _audioName;
         [SerializeField] private GameObject _curtainPrefab;
@@ -40,6 +42,7 @@ namespace _Project.CodeBase.Runtime.DI.Global
             BindAudio();
             BindConfigs();
             BindLevelSettings();
+            BindEnemyConfig();
         }
 
         private void BindTimerService() => Container.Bind<ITimer>().To<Timer>().AsSingle();
@@ -85,5 +88,7 @@ namespace _Project.CodeBase.Runtime.DI.Global
         }
 
         private void BindLevelSettings() => Container.Bind<LevelSettings>().FromInstance(_levelSettings.GetSettings()).AsSingle();
+
+        private void BindEnemyConfig() => Container.Bind<EnemyConfig>().FromInstance(_enemyConfig.GetConfig()).AsSingle();
     }
 }
